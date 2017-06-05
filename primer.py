@@ -5,9 +5,9 @@ Created on Mon May 15 23:03:09 2017
 @author: Sunny Lam
 """
 
-def get_feature_lists_by_dtype(data,features):
+def get_feature_lists_by_dtype(data):
     output = {}
-    for f in features:
+    for f in data.columns:
         dtype = str(data[f].dtype)
         if dtype not in output.keys(): output[dtype] = [f]
         else: output[dtype] += [f]
@@ -27,7 +27,3 @@ def show_all_uniques(data):
         print(key + "\n")
         show_uniques(data,dtypes[key])
         print()
-        
-# === Numerical Univariate Analysis === #
-
-# === Categorical Univariate Analysis === #
