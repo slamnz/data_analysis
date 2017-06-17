@@ -22,7 +22,7 @@ def show_uniques(data,features):
 
 def show_all_uniques(data):
     features = data.columns.tolist()
-    dtypes = get_feature_lists_by_dtype(data,features)
+    dtypes = get_feature_lists_by_dtype(data)
     for key in dtypes.keys():
         print(key + "\n")
         show_uniques(data,dtypes[key])
