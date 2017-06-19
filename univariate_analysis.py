@@ -5,12 +5,12 @@ Created on Wed May 31 11:32:47 2017
 @author: Sunny Lam
 """
 
-# === Numeric Analysis === #
-
-from seaborn import distplot, boxplot, countplot, set_style,despine, axes_style
+from seaborn import distplot, boxplot, countplot, set_style,despine, axes_style, set_palette, color_palette
 from matplotlib.pyplot import subplot, show
 from IPython.display import display
 from pandas import DataFrame
+
+# === Numeric Analysis === #
 
 def numeric_analysis(series):
     
@@ -31,9 +31,8 @@ def numeric_analysis(series):
     show()
     
     display(DataFrame(series.describe().round(2)).T)
-    
-# === Category Analysis === #
 
+<<<<<<< HEAD
 from seaborn import countplot, set_style, color_palette, despine
 from matplotlib.pyplot import show
 from IPython.display import display
@@ -56,6 +55,14 @@ def category_analysis(series):
         despine(left=True)
         show()
         display(DataFrame(series.value_counts()).T)
+=======
+# === Category Analysis === #
+    
+def category_analysis(series):
+    
+    set_style("whitegrid")
+    set_palette = color_palette("colorblind")
+>>>>>>> origin/master
     
     else:
     
@@ -78,5 +85,9 @@ def category_analysis(series):
         despine(left=True)
     
     show()
+<<<<<<< HEAD
     
     display(DataFrame(series.value_counts()).T)
+=======
+    display(DataFrame(series.value_counts().apply(lambda x: "{:.2f}%".format(x / len(series) * 100))).T)
+>>>>>>> origin/master
