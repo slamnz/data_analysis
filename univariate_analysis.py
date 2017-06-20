@@ -31,12 +31,14 @@ def numeric_analysis(series):
     show()
     
     display(DataFrame(series.describe().round(2)).T)
+    
+# ===  Category Analysis === #
 
-<<<<<<< HEAD
 from seaborn import countplot, set_style, color_palette, despine
 from matplotlib.pyplot import show
 from IPython.display import display
 from pandas import DataFrame
+from scipy.stats import chisquare
 
 def category_analysis(series):
     
@@ -44,31 +46,26 @@ def category_analysis(series):
     set_style({'axes.grid': False})
         
     if series.unique().size > 10:
+        
         ax = countplot(data=series, palette=color_palette("colorblind"))
         ax.set_title(ax.get_ylabel())
-        ax.set_ylabel("",visible=False)
         
-        last_tick = int(round(ax.get_xticks()[-1]/len(series),1) * 10) + 1
-        ax.set_xticks([i * (len(series) * 0.1) for i in range(0,last_tick)])
-        ax.set_xticklabels(["{:.0f}%".format((tick / len(series)) * 100) for tick in ax.get_xticks()])
+        last_tick = int(round(ax.get_yticks()[-1]/len(series),1) * 10) + 1
+        ax.set_yticks([i * (len(series) * 0.1) for i in range(0,last_tick)])
+        ax.set_yticklabels(["{:.0f}%".format((tick / len(series)) * 100) for tick in ax.get_yticks()])
         
         despine(left=True)
         show()
         display(DataFrame(series.value_counts()).T)
-=======
-# === Category Analysis === #
-    
-def category_analysis(series):
-    
-    set_style("whitegrid")
-    set_palette = color_palette("colorblind")
->>>>>>> origin/master
-    
+        
     else:
     
+        set_style("whitegrid")
+        set_palette = color_palette("colorblind")
+        
         ax = countplot(series, palette=color_palette("colorblind"))
         
-        last_tick = int(round(ax.get_xticks()[-1]/len(series),1) * 10) + 1
+        last_tick = int(round(ax.get_yticks()[-1]/len(series),1) * 10) + 1
         ax.set_yticks([i * (len(series) * 0.1) for i in range(0,last_tick)])
         ax.set_yticklabels(["{:.0f}%".format((tick / len(series)) * 100) for tick in ax.get_yticks()])
         
@@ -85,9 +82,14 @@ def category_analysis(series):
         despine(left=True)
     
     show()
-<<<<<<< HEAD
     
     display(DataFrame(series.value_counts()).T)
-=======
-    display(DataFrame(series.value_counts().apply(lambda x: "{:.2f}%".format(x / len(series) * 100))).T)
->>>>>>> origin/master
+    
+    statistic, p = chisquare(series.value_counts())
+    chisq = {"statistic" : statistic, "p-value" : p.round(2)}
+    
+    display(DataFrame(index=["Chi Square"], data=chisq)[["statistic","p-value"]])
+    
+    show()
+    
+    display(DataFrame(series.value_counts()).T)

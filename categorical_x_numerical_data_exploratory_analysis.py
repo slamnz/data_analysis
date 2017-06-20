@@ -53,7 +53,7 @@ def parametric_different_means_p_value_grid(samples):
     df = p_value_table.fillna(float32(None))
     heat_map = heatmap(df, annot=True, annot_kws={"size" : 24}, linewidths=2, cmap=colors.ListedColormap([diverging_palette(10, 220, sep=80, n=10)[4]]), cbar=False, square=True)
     heatmap(df, mask = df > 0.05, cmap=colors.ListedColormap([diverging_palette(10, 220, sep=80, n=10)[8]]), annot=True, annot_kws={"size" : 24}, linewidths=2, cbar=False, square=True)
-    title("DiffMeans p-value Grid", fontsize=14, loc="left")
+    title("diffmeans p-value Grid", fontsize=14, loc="left")
 
     p = diverging_palette(10, 220, sep=80, n=10)
     myColors = [p[8],p[4]]
@@ -73,12 +73,12 @@ def ranksums_p_value_grid(samples):
                 
             statistic, p = ranksums(samples[c1],samples[c2])
         
-        p_value_table[c1][c2] = round(p,2)
+            p_value_table[c1][c2] = round(p,2)
     
     df = p_value_table.fillna(float32(None))
     heat_map = heatmap(df, annot=True, annot_kws={"size" : 24}, linewidths=2, cmap=colors.ListedColormap([diverging_palette(10, 220, sep=80, n=10)[4]]), cbar=False, square=True)
     heatmap(df, mask = df > 0.05, cmap=colors.ListedColormap([diverging_palette(10, 220, sep=80, n=10)[8]]), annot=True, annot_kws={"size" : 24}, linewidths=2, cbar=False, square=True)
-    title("DiffMeans p-value Grid", fontsize=14, loc="left")
+    title("ranksums p-value Grid", fontsize=14, loc="left")
 
     p = diverging_palette(10, 220, sep=80, n=10)
     myColors = [p[8],p[4]]
@@ -103,7 +103,7 @@ def mannwhitneyu_p_value_grid(samples):
     df = p_value_table.fillna(float32(None))
     heat_map = heatmap(df, annot=True, annot_kws={"size" : 24}, linewidths=2, cmap=colors.ListedColormap([diverging_palette(10, 220, sep=80, n=10)[4]]), cbar=False, square=True)
     heatmap(df, mask = df > 0.05, cmap=colors.ListedColormap([diverging_palette(10, 220, sep=80, n=10)[8]]), annot=True, annot_kws={"size" : 24}, linewidths=2, cbar=False, square=True)
-    title("DiffMeans p-value Grid", fontsize=14, loc="left")
+    title("mannwhitneyu p-value Grid", fontsize=14, loc="left")
 
     p = diverging_palette(10, 220, sep=80, n=10)
     myColors = [p[8],p[4]]

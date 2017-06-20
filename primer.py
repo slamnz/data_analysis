@@ -21,7 +21,6 @@ def show_uniques(data,features):
             print("%s: count(%s/%s) %s" % (f,len(data[f].unique()),len(data),data[f].unique()[0:10]))
 
 def show_all_uniques(data):
-    features = data.columns.tolist()
     dtypes = get_feature_lists_by_dtype(data)
     for key in dtypes.keys():
         print(key + "\n")
