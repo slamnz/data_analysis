@@ -9,6 +9,7 @@ from seaborn import distplot, boxplot, countplot, set_style,despine, axes_style,
 from matplotlib.pyplot import subplot, show
 from IPython.display import display
 from pandas import DataFrame
+from scipy.stats import normaltest, skew, skewtest
 
 # === Numeric Analysis === #
 
@@ -19,7 +20,7 @@ def numeric_analysis(series):
     with axes_style({"axes.grid": False}):
         
         cell_1 = subplot(211)
-        dp = distplot(no_nulls, kde=False)
+        dp = distplot(no_nulls, kde=True)
         dp.set_xlabel("",visible=False)
         dp.set_yticklabels(dp.get_yticklabels(),visible=False)
         despine(left = True)
@@ -31,6 +32,12 @@ def numeric_analysis(series):
     show()
     
     display(DataFrame(series.describe().round(2)).T)
+    
+    display(DataFrame(list(normaltest(series)), columns=["Normal Test"], index=["statistic","p-value"]).T.round(2))
+    
+    display(DataFrame(list(skewtest(series)), columns=["Skew Test"], index=["statistic","p-value"]).T.round(2))
+    
+    display(DataFrame([skew(series)], columns=["Skew"], index=[""]).T)
 
 # === Category Analysis === #
     
